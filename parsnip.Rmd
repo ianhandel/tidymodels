@@ -1,0 +1,40 @@
+---
+title: "Tidymodels"
+author: "Ian Handel"
+date: "23/04/2020"
+output: github_document
+---
+
+```{r, include=FALSE}
+library(tidyverse)
+library(tidymodels)
+```
+
+
+```{r}
+mpg <- mpg %>% 
+  mutate(drive_f = factor(drv == "f"))
+```
+
+
+```{r}
+lr_mod <- 
+  logistic_reg() %>% 
+  set_engine("glm")
+```
+
+
+```{r}
+lr_fit <-
+  lr_mod %>% 
+fit(drive_f ~ displ + cyl, data = mpg)
+```
+
+
+```{r}
+lr_fit %>% 
+  tidy()
+```
+
+
+
